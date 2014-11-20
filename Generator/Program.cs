@@ -26,6 +26,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("using System;\n");
 			builder.Append("using System.Collections.Concurrent;\n");
 			builder.Append("using System.Collections.Generic;\n");
+			builder.Append("using System.Diagnostics;\n");
 			builder.Append("using System.Linq;\n");
 			builder.Append("\n");
 			builder.Append("namespace org.pescuma.sharpdecorators\n");
@@ -50,6 +51,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			decorators.Enqueue(decorator);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		public void Call(Action code)\n");
 			builder.Append("		{\n");
 			builder.Append("			var blocks = decorators.ToList();\n");
@@ -58,6 +60,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			ExecuteNext(blocks, 0);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		private void ExecuteNext(List<Action<Action>> blocks, int current)\n");
 			builder.Append("		{\n");
 			builder.Append("			blocks[current](() => ExecuteNext(blocks, current + 1));\n");
@@ -84,6 +87,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			decorators.Enqueue(decorator);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		public void Call(" + Create(i, "T{0} arg{0}") + ", Action<" + Create(i, "T{0}") + "> code)\n");
 			builder.Append("		{\n");
 			builder.Append("			var blocks = decorators.ToList();\n");
@@ -92,6 +96,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			ExecuteNext(blocks, 0, " + Create(i, "arg{0}") + ");\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		private void ExecuteNext(List<Action<Action<" + Create(i, "T{0}") + ">, " + Create(i, "T{0}")
 			               + ">> blocks, int current, " + Create(i, "T{0} arg{0}") + ")\n");
 			builder.Append("		{\n");
@@ -113,6 +118,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			decorators.Enqueue(decorator);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		public TResult Call(Func<TResult> code)\n");
 			builder.Append("		{\n");
 			builder.Append("			var blocks = decorators.ToList();\n");
@@ -121,6 +127,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			return ExecuteNext(blocks, 0);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		private TResult ExecuteNext(List<Func<Func<TResult>, TResult>> blocks, int current)\n");
 			builder.Append("		{\n");
 			builder.Append("			return blocks[current](() => ExecuteNext(blocks, current + 1));\n");
@@ -148,6 +155,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			decorators.Enqueue(decorator);\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		public TResult Call(" + Create(i, "T{0} arg{0}") + ", Func<" + Create(i, "T{0}") + ", TResult> code)\n");
 			builder.Append("		{\n");
 			builder.Append("			var blocks = decorators.ToList();\n");
@@ -156,6 +164,7 @@ namespace org.pescuma.sharpdecorators.generator
 			builder.Append("			return ExecuteNext(blocks, 0, " + Create(i, "arg{0}") + ");\n");
 			builder.Append("		}\n");
 			builder.Append("\n");
+			builder.Append("		[DebuggerStepThrough]\n");
 			builder.Append("		private TResult ExecuteNext(List<Func<Func<" + Create(i, "T{0}") + ", TResult>, " + Create(i, "T{0}")
 			               + ", TResult>> blocks, int current, " + Create(i, "T{0} arg{0}") + ")\n");
 			builder.Append("		{\n");
